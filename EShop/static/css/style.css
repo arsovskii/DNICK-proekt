@@ -1,0 +1,224 @@
+html {
+    background: rgba(2, 0, 36, 1);
+    height: 100%;
+}
+
+body {
+    background: rgba(2, 0, 36, 1);
+    font-family: 'Wix Madefor Display', sans-serif;
+    min-height: 100%;
+    background: linear-gradient(180deg, rgb(1, 0, 33) 0%, rgb(26, 88, 140) 100%);
+
+    overflow-x: hidden;
+
+}
+
+.loginCard {
+    border-radius: 3px;
+    background: linear-gradient(132deg, rgb(227, 244, 253) 0.00%, rgb(170, 209, 226) 100.00%);
+
+    box-shadow: 0 0 120px 60px #111;
+
+}
+
+.gradientBtn {
+    background: linear-gradient(132deg, rgb(65, 80, 95) 0.00%, rgb(36, 37, 38) 100.00%);
+    transition: all 0.15s ease-in-out;
+}
+
+.gradientBtn:hover {
+    filter: invert(81%) sepia(18%) saturate(4119%) hue-rotate(166deg) brightness(88%);
+
+    color: white;
+}
+
+row .card {
+    cursor: pointer;
+    transition: scale 0.1s ease-in-out, background-color 0.1s ease-in-out;
+
+}
+
+.d-grid .card:hover {
+
+    transform: scale(1.01);
+    background: rgb(221, 235, 255);
+}
+
+.nav-item > a {
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    color: #54b3d6;
+    margin: 0 0rem;
+    padding: 0 .25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.nav-item > a:hover {
+    box-shadow: inset 300px 0 0 0 #54b3d6;
+    color: white;
+}
+
+
+.multiline-hover {
+    background: linear-gradient(90deg, #ec4b29, #ec4b29) no-repeat right bottom / 0 var(--bg-h);
+    transition: background-size 350ms;
+    --bg-h: 100%;
+}
+
+.multiline-hover:where(:hover, :focus-visible) {
+    background-size: 100% var(--bg-h);
+    background-position-x: left;
+}
+
+#carouselExample .carousel-item img {
+    height: 70vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.list-game {
+    background-color: #1f5898
+
+}
+
+.tag-bg {
+    background-color: #0563ea;
+}
+
+.list-game:hover {
+    transition: all 0.1s;
+
+    transform: scale(1.01);
+    background: #467db7;
+}
+
+.btn-dark {
+    background-color: #111;
+}
+
+.bg-site {
+    background-color: #0563ea;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+
+
+.profile-bg {
+    background-color: rgb(1, 0, 33);
+    margin-top: 5rem;
+    box-shadow: 0 0 88px 30px rgba(1, 0, 33, 0.75);
+    -webkit-box-shadow: 0 0 88px 30px rgba(1, 0, 33, 0.75);
+    -moz-box-shadow: 0 0 88px 30px rgba(1, 0, 33, 0.75);
+}
+
+.buy-gradient {
+
+
+    background: rgba(41, 198, 255, 0.16);
+    background: -moz-linear-gradient(left, rgba(41, 198, 255, 0.16) 0%, rgba(161, 230, 255, 0.54) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(41, 198, 255, 0.16)), color-stop(100%, rgba(161, 230, 255, 0.54)));
+    background: -webkit-linear-gradient(left, rgba(41, 198, 255, 0.16) 0%, rgba(161, 230, 255, 0.54) 100%);
+    background: -o-linear-gradient(left, rgba(41, 198, 255, 0.16) 0%, rgba(161, 230, 255, 0.54) 100%);
+    background: -ms-linear-gradient(left, rgba(41, 198, 255, 0.16) 0%, rgba(161, 230, 255, 0.54) 100%);
+    background: linear-gradient(to right, rgba(41, 198, 255, 0.16) 0%, rgba(161, 230, 255, 0.54) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#29c6ff', endColorstr='#a1e6ff', GradientType=1);
+    box-shadow: 0 0 63px 0 rgba(84, 179, 214, 0.75);
+    -webkit-box-shadow: 0 0 63px 0 rgba(84, 179, 214, 0.75);
+    -moz-box-shadow: 0 0 63px 0 rgba(84, 179, 214, 0.75);
+
+}
+
+.profile-gradient {
+
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#1e5799+0,2989d8+50,207cca+99,207cca+99&0.2+0,0.86+100 */
+
+    background: linear-gradient(135deg, rgba(32, 124, 202, 0.0) 0%, rgba(32, 124, 202, 0.6) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+
+}
+
+.btn-buy:hover {
+    background-color: #467db7;
+
+}
+
+.btn-buy:active {
+    background-color: #467db7 !important;
+}
+
+
+.linux-black-filter {
+    filter: invert(0%) sepia(3%) saturate(198%) hue-rotate(341deg) brightness(97%) contrast(87%);
+}
+
+#addGameForm label {
+    margin-bottom: 15px;
+
+}
+
+#addGameForm input[type="checkbox"] {
+    margin-bottom: 0 !important;
+    width: 20px;
+    height: 20px;
+}
+
+.p-picture-hover:hover {
+    transition: all 0.1s ease-in-out;
+    filter: brightness(50%);
+
+}
+
+.form-profilepicture {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    width: 400px;
+    height: 200px;
+    border: 4px dashed #fff;
+
+
+}
+
+.form-profilepicture > p {
+
+
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 170px;
+    color: #ffffff;
+
+
+}
+
+.form-profilepicture > input {
+
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+
+}
+
+.form-profilepicture > a, .form-profilepicture > label {
+    display: none;
+}
+
+#tagModal > div {
+    --bs-modal-width: 700px;
+}
+

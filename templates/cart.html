@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <br>
+    <div class="container p-0 profile-bg text-light p-5">
+        <h1>Кошничка</h1>
+
+        <div class="container mt-4 ">
+            <div class="d-flex flex-row gap-5">
+                <div class="w-50 h-100">
+                    <img style="width:1000px; height:100%; aspect-ratio:21/9; object-fit: cover "
+                         class="img-fluid"
+                         src=" {% get_media_prefix %}{{ game.titleImage }}">
+                </div>
+                <div class="bg-light w-50 p-4 text-body ">
+                    <div class="d-flex flex-row justify-content-between text-muted fs-5">
+                        <div class="text-start">{{ game.name }}</div>
+                        <div class="self-align-end">
+                            {% if game.discount > 0 %}
+                                <span class="me-2 text-muted fst-italic text-decoration-line-through"
+                                      style="font-size: 1rem;">{{ game.price }}</span>
+                                <span class="badge text-bg-success me-3">-{{ game.discount }}%</span>
+                            {% endif %}
+                            <span class="text-end">{{ game.price_with_discount }} ден.</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="d-flex flex-row justify-content-between fw-bold">
+                        <div class="text-start">Вкупно</div>
+                        <div class="text-end self-align-end">{{ game.price_with_discount }} ден.</div>
+                    </div>
+                    <br>
+
+                    <div class="mt-5">
+                        <h5>Податоци за купување со платежна картичка</h5>
+                        <div class="mb-3">
+                            <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                            <img src="https://i.imgur.com/W1vtnOV.png" width="30">
+                            <img src="https://i.imgur.com/35tC99g.png" width="30">
+                            <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                        </div>
+                        <form class="form-group" action="/finishCheckout/" method="POST">
+                            {% csrf_token %}
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control " id="floatingIme"
+                                       placeholder="Име и презиме" required>
+                                <label for="floatingIme">Име и презиме</label>
+                            </div>
+                            <div class="my-3">
+                                <div class="input-group flex-grow-1 h-100 w-100">
+                                    <span class="input-group-text"><i
+                                            class="bi bi-card-heading text-end"></i></span>
+
+                                    <div class="form-floating ">
+                                        <input type="text" class="form-control" id="floatingCardNum"
+                                               placeholder="Број на картичка" required>
+                                        <label for="floatingCardNum">Број на картичка</label>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row gap-3 my-3">
+                                    <div class="form-floating w-50">
+                                        <input type="text" class="form-control" id="expiryDate"
+                                               placeholder="MM/YY" required>
+                                        <label for="expiryDate">MM/YY</label>
+                                    </div>
+                                    <div class="form-floating w-50">
+                                        <input type="password" maxlength="3" class="form-control" id="floatingCVV"
+                                               placeholder="CVV" required>
+                                        <label for="floatingCVV">CVV</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-lg w-100" name="game" value="{{ game.id }}">
+                                Плати!
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

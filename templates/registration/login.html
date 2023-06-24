@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container ">
+        <br>
+        <div class="container " style="margin-top:10rem;">
+            <div class="container loginCard border-pill mt-5 p-5 pt-5 w-50" data-bs-theme="dark">
+                <h1 class="mb-4 fw-bold">Логирај се!</h1>
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="input-group  mb-3">
+
+                            {% for field in form %}
+                                {% if field.html_name == "username" %}
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+
+                                    {% if field.errors %}
+                                        <input class="form-control form-control-lg is-invalid"
+                                               id="{{ field.id_for_label }}"
+                                               name="{{ field.html_name }}" placeholder="Username/ E-Mail" type="text"/>
+                                    {% else %}
+                                        <input class="form-control form-control-lg" id="{{ field.id_for_label }}"
+                                               name="{{ field.html_name }}" placeholder="Username/ E-Mail" type="text"/>
+                                    {% endif %}
+                                {% elif field.html_name == "password" %}
+                                    {% if field.errors %}
+                                        <input class="form-control form-control-lg is-invalid" id="{{ field.id_for_label }}"
+                                               name="{{ field.html_name }}" placeholder="Password" type="password"/>
+                                    {% else %}
+                                        <input class="form-control form-control-lg" id="{{ field.id_for_label }}"
+                                               name="{{ field.html_name }}" placeholder="Password" type="password"/>
+                                    {% endif %}
+                                {% endif %}
+
+
+                                </div>
+                            {% endfor %}
+                    <br>
+                        <span >Немаш профил? <a href="/accounts/register?u=buyer">Регистрирај се!</a></span>
+                        <div class="text-center mt-3">
+                            <input type="submit" class="btn btn-lg w-75  mx-auto gradientBtn" value="Login"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

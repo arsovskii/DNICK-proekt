@@ -1,0 +1,24 @@
+<div class="modal" id="modalPicture" tabindex="-1" data-bs-theme="dark">
+    <div class="modal-dialog">
+        <div class="modal-content p-4 ">
+
+            <div class="modal-body position-relative " style="height:300px;">
+                <form id="pictureForm" class="form-profilepicture" action="" method="POST" enctype="multipart/form-data"
+                      accept="image/*">
+                    {% csrf_token %}
+                    {% if form is not None %}
+                        {% for field in form %}
+                            <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}"
+                                   id="{{ field.id_for_label }}">
+                            <p id="pictureP">Постави ја новата профилна овде!</p>
+                        {% endfor %}
+                    {% endif %}
+                    <br>
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

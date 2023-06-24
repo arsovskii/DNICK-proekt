@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+
+{% endblock %}
+{% block content %}
+    <br>
+    <br>
+    <div class="container p-5 mt-5 alert alert-{{ type }} fs-3" data-bs-theme="dark">
+        <a href="{{ link }}">{{ info }}</a>
+    </div>
+
+{% endblock %}

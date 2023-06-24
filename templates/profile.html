@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <br>
+    <div class="container p-0 profile-bg">
+        <div class=" p-3 profile-gradient d-flex flex-row">
+            {% if user.id == buyer.user.id %}
+                <div style=" height:256px; width:256px; cursor: pointer" class="border border-5 position-relative"
+                     data-bs-toggle="modal"
+                     data-bs-target="#modalPicture">
+                    <img class="p-picture-hover" style="width:auto; height:100%; aspect-ratio:1; object-fit: cover"
+                         src="{% get_media_prefix %}{{ buyer.profilePicture }} ">
+                    <div class="position-absolute  text-light" style="top:5px; right:10px;"><i
+                            class="bi bi-pencil-square"></i></div>
+                </div>
+            {% else %}
+                <div style=" height:256px; width:256px" class="border border-5 position-relative"
+                >
+                    <img style="width:auto; height:100%; aspect-ratio:1; object-fit: cover"
+                         src="{% get_media_prefix %}{{ buyer.profilePicture }} ">
+
+                </div>
+            {% endif %}
+            <div class="container text-light m-3">
+                <h1 class="fw-bold fs-1">{{ buyer.user.username }} {% if isDev %}
+                    <div class=" my-auto ms-3 badge text-bg-danger fs-4">D</div>
+                {% endif %}</h1>
+                <p class="text-light fs-5">{{ buyer.user.email }}</p>
+            </div>
+            {% if user.id == buyer.user.id %}
+                <div class="p-3 pe-4 d-flex flex-column justify-content-between text-end w-50">
+                    <div class="nav-item">
+                        <a class="link-light link-underline-opacity-0 fs-4" href="/accounts/logout/">Logout</a>
+                    </div>
+                    {% if not isDev %}
+                        <div class="">
+                            <a href="{% url 'devtrans' %}"
+                               class="link-light link-underline-opacity-0 fa-4 multiline-hover">Премини
+                                во developer профил</a>
+                        </div>
+                    {% else %}
+                        <div class="d-flex flex-row">
+                            <div class="nav-item">
+                                <a class="link-light link-underline-opacity-0 fs-5" href="/profile/developer/games">Твои
+                                    веќе објавени игри</a>
+                            </div>
+                            <div class="nav-item">
+                                <a class="link-light link-underline-opacity-0 fs-5" href="/addGame/">Постави нова
+                                    игра</a>
+                            </div>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="container mt-3 py-3">
+            {% for game in games %}
+
+                <div onclick="location.href='/games/{{ game.developer }}/{{ game.id }}';"
+                     class="container w-100 h-25 d-flex p-0 mb-2 list-game"
+                     style="cursor:pointer;">
+                    <div style="width: 20%; height:100%">
+                        <a style="width:100%; height:100%;"
+                           href="/games/{{ game.developer.user.username }}/{{ game.id }}">
+
+                            <img style="width:400px; height:100%; aspect-ratio:21/9; object-fit: cover "
+                                 src="{% get_media_prefix %}{{ game.titleImage }}"
+                                 class="img-fluid">
+                        </a>
+
+                    </div>
+                    <div class="d-flex flex-column ps-3">
+                        <div class="text-light fs-2">
+                            {{ game.name }}
+                        </div>
+
+                    </div>
+
+                    <div class="ms-auto me-3 pt-2 d-flex flex-column ">
+                        <div class="d-flex flex-column fs-3 flex-grow-1 ">
+                            <div>
+                                <form action="/download/{{ game.id }}" method="POST">
+                                    {% csrf_token %}
+                                    <button class="btn btn-dark btn-lg ">
+                                        <i class="bi bi-cloud-arrow-down-fill"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+
+    {% include 'changeProfilePicture.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% get_static_prefix %}scripts/formScript.js"></script>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <br>
+    <div class="container p-3 profile-bg text-light" id="addGameForm">
+        <form method="POST" action="/addGame/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="w-50 mx-auto">
+
+
+                {{ form.as_div }}
+                <h3>Images</h3>
+                {{ pForm.management_form }}
+                <div id="formset-container">
+                    {% for form in pForm %}
+                        <div class="formset-row">
+                            {{ form.as_table }}
+                            {% if form.instance.pk %}
+                                <input type="hidden" name="formset-{{ forloop.counter0 }}-DELETE"
+                                       id="id_formset-{{ forloop.counter0 }}-DELETE">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <button type="button" class="btn btn-primary" id="add-formset-row">Add Image</button>
+                <button class="btn btn-primary w-100 mt-3" type="submit">Прати</button>
+            </div>
+        </form>
+    </div>
+    <div id="formset-template" hidden>
+        <div class="formset-row d-flex flex-row mb-2">
+            <div>
+                <label for="id_images-__prefix__-image">Image:</label>
+                <input type="file" name="images-__prefix__-image" required id="id_images-__prefix__-image">
+            </div>
+            <input type="button" value="Remove" class="btn btn-danger btn-sm remove-formset-row ms-auto">
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/imageAdder.js' %}"></script>
+    <script>
+        var template = document.getElementById('formset-template');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var addButton = document.getElementById('add-formset-row');
+            var formsetContainer = document.getElementById('formset-container');
+            var totalForms = document.getElementById('id_images-TOTAL_FORMS');
+            var formsetIndex = Number(totalForms.value);
+
+
+            addButton.addEventListener('click', addFormsetRow);
+
+            function addFormsetRow() {
+                var newFormset = template.cloneNode(true);
+
+                newFormset.innerHTML = newFormset.innerHTML.replace(/__prefix__/g, `${formsetIndex}`);
+
+
+                newFormset.removeAttribute("hidden");
+                newFormset.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
+                        newFormset.remove();
+
+                        //var deleteField = row.querySelector('[name$="-DELETE"]');
+                        //if (deleteField) {
+                        //    deleteField.value = 'on';
+                        //}
+                        //row.remove();
+                        formsetIndex--;
+                    }
+                )
+                formsetIndex++;
+                formsetContainer.appendChild(newFormset);
+                totalForms.setAttribute('value', formsetIndex);
+            }
+
+
+        });
+
+    </script>
+{% endblock %}

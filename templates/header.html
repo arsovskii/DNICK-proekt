@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand w-100 p-0 navbar-dark mt-4"
+     style="z-index:1000; background-color: rgba(17,17,17,0.8); position: absolute">
+    <div class="container">
+        <a class="navbar-brand" href="/"><i style="font-size: 2rem" class="bi bi-joystick"></i></a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class=" link-light  link-underline-opacity-0 fs-4" href="/list/">Продавница</a>
+                </li>
+
+            </ul>
+
+            {% if not user.is_authenticated %}
+                <li class="nav-item">
+
+                    <a class="link-light fs-3 link-underline-opacity-0" href="/accounts/login/" style="cursor:pointer">Login</a>
+                </li>
+            {% else %}
+                <li class="nav-item d-flex align-items-center">
+
+                    <a class="link-light fs-3 link-underline-opacity-0" href="/profile/u/{{ user.username }}"
+                       style="cursor:pointer">{{ user }}</a>
+
+
+                </li>
+            {% endif %}
+        </div>
+    </div>
+</nav>

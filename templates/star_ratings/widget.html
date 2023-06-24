@@ -1,0 +1,15 @@
+{% extends "star_ratings/widget_base.html" %}
+
+{% block rating_detail %}
+    <div class="star-ratings-rating-average text-light fs-5"><span
+            class='star-ratings-rating-value '>{{ rating.average|floatformat:"-2" }}</span><span> / 5</span></span>
+    </div>
+{% if not user.is_anonymous %}
+        <div class="star-ratings-rating-user text-light fs-5">Твоја оценка: <span class='star-ratings-rating-value'
+                                                                                  data-when-null="">{% if user_rating %}
+            {{ user_rating.score }}{% else %} {% endif %}</span></div>
+    {% endif %}
+
+
+
+{% endblock %}
