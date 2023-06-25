@@ -9,7 +9,8 @@
 `Django > 4.2.2`<br>
 `Pillow`<br>
 `Django-filter`<br>
-`Django-star-ratings`
+`Django-star-ratings`<br>
+`python-dotenv`
 
 Пред почетокот може да се искористи командата `pip freeze -r requirements.txt` за да се инсталираат потребните dependencies.
 

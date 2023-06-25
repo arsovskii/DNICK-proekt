@@ -3,6 +3,7 @@ import json
 from django.contrib.auth import hashers
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db import models
 from django.db.models import Q
@@ -41,12 +42,13 @@ def register(request):
                         email=form_data.cleaned_data["email"].lower(),
                         password=hashers.make_password(form_data.cleaned_data["password"])
                         )
-
+            send_mail("Креиран е нов профил", f"Креиран е профил со корисничко име {user.username}",
+                      "arsovskigames@gmail.com", [user.email])
             user.save()
             buyerUser = BuyerUser(user=user)
             buyerUser.save()
             return render(request, "info.html",
-                          context=infoContext(request, "Успешно креиран профил! Логирај се", 'success',
+                          context=infoContext(request, "Успешно креиран профил! Испратен Ви е мејл. Логирај се", 'success',
                                               '/accounts/login/     '))
 
     # form.add_error(field=None, error="Invalid Username")
@@ -130,7 +132,8 @@ def gameList(request):
     if request.GET.get('valname'):
         valname = request.GET.get('valname')
         id = \
-            Product.objects.filter(approved=True).filter(name=valname).order_by("-popularity")[:LIMITSEARCH].values("name")[
+            Product.objects.filter(approved=True).filter(name=valname).order_by("-popularity")[:LIMITSEARCH].values(
+                "name")[
                 0][
                 'name']
         return JsonResponse({'id': id}, status=200)
@@ -158,7 +161,8 @@ def gameList(request):
     games = None
     if searchName is not None:
         games = Product.objects.filter(approved=True).filter(
-            Q(name=searchName) | Q(developer__user__username__icontains=searchName) | Q(tags__name__contains=searchName)).annotate(
+            Q(name=searchName) | Q(developer__user__username__icontains=searchName) | Q(
+                tags__name__contains=searchName)).annotate(
             price_with_discount=models.ExpressionWrapper(
                 models.F('price') - (models.F('price') * models.F('discount') / 100),
                 output_field=models.DecimalField(max_digits=10, decimal_places=2)
@@ -281,10 +285,10 @@ def postTag(request):
         tagName = decoded[1]['tag']
         tag = Tag.objects.filter(product__id=gameid).get_or_create(name__iexact=tagName)[0]
         tag.name = tagName
-        tag.importance+=1
+        tag.importance += 1
         tag.product_set.add(Product.objects.get(id=gameid))
-        tag.save(update_fields=["name","importance"])
+        tag.save(update_fields=["name", "importance"])
 
         tags = Tag.objects.filter(product__id=gameid).all()
 
-        return JsonResponse({'tags': list(tags.values_list("name",flat=True))}, status=200)
+        return JsonResponse({'tags': list(tags.values_list("name", flat=True))}, status=200)
