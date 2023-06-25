@@ -222,3 +222,13 @@ row .card {
     --bs-modal-width: 700px;
 }
 
+.downArrow:hover{
+    color:#54b3d6   !important;
+    transform:scale(1.1) translateY(5px);
+    transition: all 0.2s ease-in-out;
+
+
+}
+#formset-container input{
+    width:50%;
+}

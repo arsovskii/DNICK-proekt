@@ -16,6 +16,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+MEDIA_URL = "EShop/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'EShop', 'media')
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +29,7 @@ SECRET_KEY = 'django-insecure-(4pehmc828*e^(p2$@0to7*4c00d$zu3)k@qi*r(kzu=cu!!0d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["arsovski.pythonanywhere.com", "localhost"]
 
 # Application definition
 
@@ -129,3 +131,4 @@ LOGOUT_REDIRECT_URL = "/"
 STAR_RATINGS_RERATE_SAME_DELETE = True
 
 FILTERS_EMPTY_CHOICE_LABEL = 'Жанр'
+

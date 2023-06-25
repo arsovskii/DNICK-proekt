@@ -16,9 +16,9 @@ from EShop.forms import BuyerForm, ProductForm, ImageFormSet, UserPictureUpdateF
 from EShop.models import BuyerUser, DeveloperUser, Product, Tag
 from EShop.utils import infoContext
 
-LIMIT = 11
-PAGINATIONSIZE = 20
-POPULARITYCUTOFF = 70
+LIMITSEARCH = 11
+PAGINATIONSIZE = 10
+POPULARITYCUTOFF = 75
 
 
 # Create your views here.
@@ -130,7 +130,7 @@ def gameList(request):
     if request.GET.get('valname'):
         valname = request.GET.get('valname')
         id = \
-            Product.objects.filter(approved=True).filter(name=valname).order_by("-popularity")[:LIMIT].values("name")[
+            Product.objects.filter(approved=True).filter(name=valname).order_by("-popularity")[:LIMITSEARCH].values("name")[
                 0][
                 'name']
         return JsonResponse({'id': id}, status=200)
@@ -264,7 +264,7 @@ def search(request):
 
     if name:
         games = Product.objects.filter(Q(name__icontains=name) | Q(developer__user__username__icontains=name)).filter(
-            approved=True).order_by("-popularity")[:LIMIT]
+            approved=True).order_by("-popularity")[:LIMITSEARCH]
         for game in games:
             list.append({"name": game.name, "img": game.titleImage.url, "id": game.id,
                          "developer": game.developer.user.username, "price": game.price_with_discount()})
