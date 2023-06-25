@@ -43,7 +43,7 @@ def register(request):
                         password=hashers.make_password(form_data.cleaned_data["password"])
                         )
             send_mail("Креиран е нов профил", f"Креиран е профил со корисничко име {user.username}",
-                      "arsovskigames@gmail.com", [user.email])
+                       [user.email])
             user.save()
             buyerUser = BuyerUser(user=user)
             buyerUser.save()
